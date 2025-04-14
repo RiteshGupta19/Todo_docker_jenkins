@@ -5,7 +5,7 @@ pipeline {
         // Stage to clone the repository
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/RiteshGupta19/Todo_docker_jenkins.git'  // Make sure your repo is public and the URL is correct
+                git branch: 'main', url: 'https://github.com/RiteshGupta19/Todo_docker_jenkins.git'
             }
         }
 
