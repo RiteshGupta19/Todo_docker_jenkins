@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    image: ritesh0419/todo-backend:latest
+    build: ./Todo_compose/backend
+    ports:
+      - "5000:5000"
+    networks:
+      - todo_network
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URL=mongodb://mongodb:${MONGO_PORT}/${DB_NAME}
+
+  frontend:
+    image: ritesh0419/todo-frontend:latest
+    build: ./Todo_compose/frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - todo_network
+
+  mongodb:
+    image: mongo:4.4
+    ports:
+      - "${MONGO_PORT}:${MONGO_PORT}"
+    networks:
+      - todo_network
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+
+networks:
+  todo_network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local 
