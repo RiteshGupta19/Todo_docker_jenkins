@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     image: ritesh0419/todo-backend:latest
-    build: ./Todo_compose/backend
+    build: ./todo-docker-jenkins/backend
     ports:
       - "5000:5000"
     networks:
@@ -15,7 +15,7 @@ services:
 
   frontend:
     image: ritesh0419/todo-frontend:latest
-    build: ./Todo_compose/frontend
+    build: ./todo-docker-jenkins/frontend
     ports:
       - "5173:5173"
     networks:
