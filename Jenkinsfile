@@ -19,9 +19,11 @@ pipeline {
             }
         }
 
-        stage('Install OWASP Dependency-Check') {
+        stage('Install unzip and OWASP Dependency-Check') {
             steps {
                 sh '''
+                    sudo apt-get update
+                    sudo apt-get install -y unzip
                     if [ ! -d "${DEPENDENCY_CHECK_DIR}" ]; then
                         wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip
                         unzip dependency-check-8.4.0-release.zip -d .
