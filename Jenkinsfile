@@ -57,6 +57,26 @@ pipeline {
         }
     }
 
+    stage('Run Trivy Scan - Backend') {
+            steps {
+                sh 'trivy image ritesh0419/todo-backend:latest'
+            }
+        }
+
+        stage('Run Trivy Scan - Frontend') {
+            steps {
+                sh 'trivy image ritesh0419/todo-frontend:latest'
+            }
+        }
+
+        stage('Run Trivy Scan - MongoDB') {
+            steps {
+                sh 'trivy image mongo:4.4'
+            }
+        }
+    }
+
+
     post {
         always {
             archiveArtifacts artifacts: 'reports/*.html', allowEmptyArchive: true
