@@ -56,7 +56,7 @@ pipeline {
             }
         }
 
-        // Trivy scan stages should be inside the 'stages' block
+         
         stage('Run Trivy Scan - Backend') {
             steps {
                 sh 'trivy image ritesh0419/todo-backend:latest'
@@ -74,7 +74,7 @@ pipeline {
                 sh 'trivy image mongo:4.4'
             }
         }
-    }  // End of 'stages' block
+    }   
 
     post {
         always {
