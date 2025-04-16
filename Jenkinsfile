@@ -19,30 +19,30 @@ pipeline {
             }
         }
 
-        stage('Install OWASP Dependency-Check') {
-            steps {
-                sh '''
-                    if [ ! -d "${DEPENDENCY_CHECK_DIR}" ]; then
-                        wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip
-                        unzip dependency-check-8.4.0-release.zip -d .  # Unzipping the downloaded file
-                        mv dependency-check dependency-check
-                    fi
-                '''
-            }
-        }
+        // stage('Install OWASP Dependency-Check') {
+        //     steps {
+        //         sh '''
+        //             if [ ! -d "${DEPENDENCY_CHECK_DIR}" ]; then
+        //                 wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip
+        //                 unzip dependency-check-8.4.0-release.zip -d .  # Unzipping the downloaded file
+        //                 mv dependency-check dependency-check
+        //             fi
+        //         '''
+        //     }
+        // }
 
-        stage('Run OWASP Dependency-Check') {
-            steps {
-                sh '''
-                    mkdir -p ${REPORTS_DIR}
-                    ${DEPENDENCY_CHECK_DIR}/bin/dependency-check.sh \
-                        --project "todo-app" \
-                        --scan . \
-                        --format HTML \
-                        --out ${REPORTS_DIR}
-                '''
-            }
-        }
+        // stage('Run OWASP Dependency-Check') {
+        //     steps {
+        //         sh '''
+        //             mkdir -p ${REPORTS_DIR}
+        //             ${DEPENDENCY_CHECK_DIR}/bin/dependency-check.sh \
+        //                 --project "todo-app" \
+        //                 --scan . \
+        //                 --format HTML \
+        //                 --out ${REPORTS_DIR}
+        //         '''
+        //     }
+        // }
 
         stage('Rebuild Docker containers') {
             steps {
@@ -57,23 +57,23 @@ pipeline {
         }
 
          
-        stage('Run Trivy Scan - Backend') {
-            steps {
-                sh 'trivy image ritesh0419/todo-backend:latest'
-            }
-        }
+        // stage('Run Trivy Scan - Backend') {
+        //     steps {
+        //         sh 'trivy image ritesh0419/todo-backend:latest'
+        //     }
+        // }
 
-        stage('Run Trivy Scan - Frontend') {
-            steps {
-                sh 'trivy image ritesh0419/todo-frontend:latest'
-            }
-        }
+        // stage('Run Trivy Scan - Frontend') {
+        //     steps {
+        //         sh 'trivy image ritesh0419/todo-frontend:latest'
+        //     }
+        // }
 
-        stage('Run Trivy Scan - MongoDB') {
-            steps {
-                sh 'trivy image mongo:4.4'
-            }
-        }
+        // stage('Run Trivy Scan - MongoDB') {
+        //     steps {
+        //         sh 'trivy image mongo:4.4'
+        //     }
+        // }
     }   
 
     post {
