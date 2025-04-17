@@ -37,14 +37,18 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
 
   sonarqube:
-    image: sonarqube:lts-community
-    container_name: SonarQube-Server
-    restart: always
-    ports:
-      - "9000:9000"
-    networks:
-      - todo_network
-
+      image: sonarqube:lts-community
+      container_name: SonarQube-Server
+      restart: always
+      ports:
+        - "9000:9000"
+      networks:
+        - todo_network
+      volumes:
+        - sonarqube_data:/opt/sonarqube/data
+        - sonarqube_extensions:/opt/sonarqube/extensions
+        - sonarqube_logs:/opt/sonarqube/logs
+      
 networks:
   todo_network:
     driver: bridge
@@ -52,6 +56,9 @@ networks:
 volumes:
   mongo-data:
     driver: local
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
 
 
 
