@@ -3,6 +3,7 @@ version: '3.8'
 services:
   backend:
     image: ritesh0419/todo-backend:latest
+    restart: always
     build: ./todo-docker-jenkins/backend
     ports:
       - "5000:5000"
@@ -15,6 +16,7 @@ services:
 
   frontend:
     image: ritesh0419/todo-frontend:latest
+    restart: always
     build: ./todo-docker-jenkins/frontend
     ports:
       - "5173:5173"
@@ -23,6 +25,7 @@ services:
 
   mongodb:
     image: mongo:4.4
+    restart: always
     ports:
       - "${MONGO_PORT}:${MONGO_PORT}"
     networks:
