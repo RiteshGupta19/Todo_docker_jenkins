@@ -4,6 +4,7 @@ pipeline {
     environment {
         DEPENDENCY_CHECK_DIR = './dependency-check'
         REPORTS_DIR = './reports'
+        scannerHome = tool 'Sonar'
     }
 
     stages {
@@ -16,6 +17,19 @@ pipeline {
         stage('Stop existing containers') {
             steps {
                 sh 'docker-compose down || true'
+            }
+        }
+
+                stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('Sonar') {
+                    sh '''
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=todo-app \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://localhost:9000
+                    '''
+                }
             }
         }
 
