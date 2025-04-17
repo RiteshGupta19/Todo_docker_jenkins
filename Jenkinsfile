@@ -4,7 +4,6 @@ pipeline {
     environment {
         DEPENDENCY_CHECK_DIR = './dependency-check'
         REPORTS_DIR = './reports'
-        scannerHome = tool 'Sonar'
     }
 
     stages {
@@ -14,28 +13,7 @@ pipeline {
             }
         }
 
-        stage('Stop existing containers') {
-            steps {
-                sh 'docker-compose down || true'
-            }
-        }
-
-           stage('SonarQube Analysis') {
-    environment {
-        SONAR_TOKEN = credentials('Sonar')
-    }
-    steps {
-        withSonarQubeEnv('Sonar') {
-            sh '''
-                /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/Sonar/bin/sonar-scanner \
-                -Dsonar.projectKey=todo-app \
-                -Dsonar.sources=. \
-                -Dsonar.host.url=http://localhost:9000 \
-                -Dsonar.login=$SONAR_TOKEN
-            '''
-        }
-    }
-}
+     
 
         // stage('Install OWASP Dependency-Check') {
         //     steps {
