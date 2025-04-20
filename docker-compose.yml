@@ -80,13 +80,13 @@ services:
     networks:
       - todo_network
 
-  networks:
-    todo_network:
-      driver: bridge
+networks:
+  todo_network:
+    driver: bridge
 
-  volumes:
-    mongo-data:
-    grafana-storage:
+volumes:
+  mongo-data:
+  grafana-storage:
   # sonarqube_data:
   # sonarqube_extensions:
   # sonarqube_logs:
