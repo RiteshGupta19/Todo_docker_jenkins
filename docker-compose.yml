@@ -5,8 +5,8 @@ services:
     image: ritesh0419/todo-backend:latest
     restart: always
     build: ./todo-docker-jenkins/backend
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
     networks:
       - todo_network
     depends_on:
