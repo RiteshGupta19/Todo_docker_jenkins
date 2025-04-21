@@ -5,8 +5,8 @@ services:
     image: ritesh0419/todo-backend:latest
     restart: always
     build: ./todo-docker-jenkins/backend
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
     networks:
       - todo_network
     depends_on:
@@ -35,6 +35,17 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+    networks:
+      - todo_network
 
   # sonarqube:
   #     image: sonarqube:lts-community
