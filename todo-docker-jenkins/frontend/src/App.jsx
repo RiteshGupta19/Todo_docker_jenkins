@@ -19,6 +19,7 @@ function App() {
   };
 
   const addTodo = async () => {
+   console.log(`${API_URL`);
     if (!title.trim()) return;
     try {
       await fetch(`${API_URL}/todos`, {
@@ -65,6 +66,8 @@ function App() {
   useEffect(() => {
     fetchTodos();
   }, []);
+
+ 
 
   return (
     <div className="app">
