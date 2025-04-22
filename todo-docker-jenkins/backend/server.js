@@ -9,7 +9,8 @@ connectDB();
 
 const app = express();
 app.use(cors({
-  origin: 'http://43.204.131.219', 
+  origin: 'http://43.204.131.219:5173', 
+  methods: ['GET', 'POST'],
 }));
 app.use(express.json());
 
